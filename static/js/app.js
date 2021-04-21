@@ -67,7 +67,7 @@ function fillChartData(selectedData, wfreq){
   //gauge chart data
   var gaugeData = [
     {
-      title: { text: "Belly Button Washing Frecuency" },
+      title: { text: "Belly Button Washing Frequency" },
       type: "indicator",
       mode: "gauge+number",
       gauge: {
