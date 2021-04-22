@@ -67,7 +67,7 @@ function fillChartData(selectedData, wfreq){
   //gauge chart data
   var gaugeData = [
     {
-      title: { text: "Belly Button Washing Frequency" },
+      title: { text: "Belly Button Washing Frecuency" },
       type: "indicator",
       mode: "gauge+number",
       gauge: {
@@ -102,25 +102,26 @@ function fillChartData(selectedData, wfreq){
 }
 //-----------drop down list variable data--------------------------------
 //Obtaning the data with fetch and when ready, create the initial charts
+//first we obtain the JSON through a request to the local structure of the project. When request is ready, then we convert the response from json to object and then we receive the dataset as an array.
+//this fetch only will work in a local server.
 //Arrow functions
-//Reads data from JSON
 fetch("./samples.json").then((response) => response.json()).then(response => {
   sampleJSON = response;
-  const select = document.getElementById("selDataset");
-  //
+  const select = document.getElementById("selDataset"); //getting the select element reference
+  
   //filling the select dropdown with the individuals ids
   sampleJSON.samples.map((sample, index) => {
-    var opt = document.createElement("option");
-    opt.value = index;
-    opt.innerHTML = sample.id;
-    //added here
-    select.appendChild(opt);
+    var opt = document.createElement("option");  //creating a new option element
+    opt.value = index; //set the new option value
+    opt.innerHTML = sample.id; //set the option render value
+    
+    select.appendChild(opt); //addind the new option to the select element
   })
-  //populates panel data and fills in changed chart data
-  fillChartData(sampleJSON.samples[0],sampleJSON.metadata[0].wfreq);
-  fillInformation(sampleJSON.metadata[0]);
+  
+  fillChartData(sampleJSON.samples[0],sampleJSON.metadata[0].wfreq); //creating the charts for first time, giving the frist individual of dataset
+  fillInformation(sampleJSON.metadata[0]);  //setting the information panel with the first individual of the dataset
 }).catch(err => {
-  console.log(err);
+  console.log(err); //log error if the request fails
 });
 
 //Change the selected individual and re-drawing the charts and information panel
